@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+{% block title %}Редактирование категории{% endblock %}
+{% block content %}
+<h2>Редактирование категории</h2>
+<form method="POST">
+    {% csrf_token %}
+    <p>
+        <label>Введите название категории</label>
+        <input type="text" name="name" value="{{ category.name }}">
+    </p>
+    <p>
+        <label>Выберите нужный тип для категории</label>
+        <select name="type">
+            {% for type in types %}
+            <option value="{{ type.id }}"
+            {% if type.id == category.type_id %}
+            selected
+            {% endif %}
+            >{{ type.name }}</option>
+            {% endfor %}
+        </select>
+    </p>
+  <input type="submit" value="Сохранить">
+</form>
+{% endblock %}

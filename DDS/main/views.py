@@ -4,19 +4,47 @@ from .models import Status, Subcategory, Category, DDS, Type
 
 
 def index(request):
-    return render(request, 'main/index.html')
+    ddes = DDS.objects.all()
+    return render(request, 'main/index.html', {"ddes": ddes})
 
 
 def categories(request):
-    return render(request, 'main/categories.html')
+    categories = Category.objects.all()
+    types = Type.objects.all()
+    return render(request, 'main/categories.html', {"categories": categories, "types": types})
 
 
 def add_category(request):
-    pass
+    if request.method == "POST":
+        category = Category()
+        category.name = request.POST.get("name")
+        category.type_id = request.POST.get("type")
+        category.save()
+    return HttpResponseRedirect("/categories")
 
 
-def edit_category(request):
-    pass
+def edit_category(request, id):
+    try:
+        category = Category.objects.get(id=id)
+        if request.method == "POST":
+            category.name = request.POST.get("name")
+            category.type_id = request.POST.get("type")
+            category.save()
+            return HttpResponseRedirect("/categories")
+        else:
+            types = Type.objects.all()
+            return render(request, 'main/edit_category.html', {"types": types, "category": category})
+    except Category.DoesNotExist:
+        return HttpResponseNotFound("<h2>Категория не найдена</h2>")
+
+
+def delete_category(request, id):
+    try:
+        category = Category.objects.get(id=id)
+        category.delete()
+        return HttpResponseRedirect("/categories")
+    except Category.DoesNotExist:
+        return HttpResponseNotFound("<h2>Категория не найдена</h2>")
 
 
 def statuses(request):
@@ -87,9 +115,23 @@ def add_type(request):
     return HttpResponseRedirect("/types")
 
 
-def edit_type(request):
-    pass
+def edit_type(request, id):
+    try:
+        type = Type.objects.get(id=id)
+        if request.method == "POST":
+            type.name = request.POST.get("name")
+            type.save()
+            return HttpResponseRedirect("/types")
+        else:
+            return render(request, 'main/edit_type.html', {"type": type})
+    except Type.DoesNotExist:
+        return HttpResponseNotFound("<h2>Тип не найден</h2>")
 
 
-def delete_type(request):
-    pass
+def delete_type(request, id):
+    try:
+        type = Type.objects.get(id=id)
+        type.delete()
+        return HttpResponseRedirect("/types")
+    except Type.DoesNotExist:
+        return HttpResponseNotFound("<h2>Тип не найден</h2>")
