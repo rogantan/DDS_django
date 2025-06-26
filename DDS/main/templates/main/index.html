@@ -1,5 +1,36 @@
 {% extends 'main/base.html' %}
 {% block title %}Главная страница{% endblock %}
 {% block content %}
-<h1>Hello World</h1>
+<h1>Управления движением денежных средств </h1>
+<form method="GET">
+    {{ filter_form.as_p }}
+    <button type="submit">Применить</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Дата</th>
+        <th>Статус</th>
+        <th>Тип</th>
+        <th>Категория</th>
+        <th>Подкатегория</th>
+        <th>Сумма</th>
+        <th>Комментарий</th>
+    </tr></thead>
+    <tbody>
+    {% for entry in entries %}
+    <tr>
+        <td>{{ entry.date }}</td>
+        <td>{{ entry.status }}</td>
+        <td>{{ entry.type }}</td>
+        <td>{{ entry.category }}</td>
+        <td>{{ entry.subcategory }}</td>
+        <td>{{ entry.amount }} ₽</td>
+        <td>{{ entry.comment }}</td>
+        <td><a href="{% url 'edit_entry' entry.pk %}" class="btn btn-warning btn-sm">Редактировать</a></td>
+        <td><a href="{% url 'delete_entry' entry.pk %}" class="btn btn-danger btn-sm">Удалить</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

@@ -1,5 +1,30 @@
 {% extends 'main/base.html' %}
-{% block title %}Категории{% endblock %}
+{% block title %}Типы{% endblock %}
 {% block content %}
 <h1>Типы</h1>
+<form method="POST" action="add_type/">
+    {% csrf_token %}
+    <p>
+        <label>Введите название типа</label>
+        <input type="text" name="name">
+    </p>
+    <input type="submit" value="Сохранить">
+</form>
+<table>
+<thead>
+<tr>
+    <th>Id</th>
+    <th>Название</th>
+</tr>
+</thead>
+<tbody>
+{% for type in types %}
+<tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ type.name }}</td>
+    <td><a href="edit/{{ type.id }}">Изменить</a><a href="delete/{{ type.id}}">Удалить</a></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
 {% endblock %}

@@ -27,3 +27,7 @@ body {
 .list li a:active {
     opacity: 1;
 }
+
+td a {
+    color: #fff;
+}

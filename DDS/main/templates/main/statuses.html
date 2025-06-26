@@ -1,5 +1,30 @@
 {% extends 'main/base.html' %}
-{% block title %}Категории{% endblock %}
+{% block title %}Статусы{% endblock %}
 {% block content %}
 <h1>Статусы</h1>
+<form method="POST" action="add_status/">
+    {% csrf_token %}
+    <p>
+        <label>Введите название статуса</label>
+        <input type="text" name="name">
+    </p>
+    <input type="submit" value="Сохранить">
+</form>
+<table>
+<thead>
+<tr>
+    <th>Id</th>
+    <th>Название</th>
+</tr>
+</thead>
+<tbody>
+{% for status in statuses %}
+<tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ status.name }}</td>
+    <td><a href="edit/{{ status.id }}">Изменить</a><a href="delete/{{ status.id}}">Удалить</a></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
 {% endblock %}

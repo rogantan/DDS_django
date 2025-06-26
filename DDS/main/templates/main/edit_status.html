@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %}
+{% block title %}Редактирование статуса{% endblock %}
+{% block content %}
+<h2>Редактирование статуса</h2>
+<form method="POST">
+  {% csrf_token %}
+  <p>
+    <label>Введите название статуса</label>
+    <input type="text" name="name" value="{{ status.name }}">
+  </p>
+  <input type="submit" value="Сохранить">
+</form>
+{% endblock %}
