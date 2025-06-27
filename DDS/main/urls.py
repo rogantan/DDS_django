@@ -16,5 +16,8 @@ urlpatterns = [
     path('types/delete_type/<int:id>/', views.delete_type),
     path('categories/add_category/', views.add_category),
     path('categories/edit_category/<int:id>/', views.edit_category),
-    path('categories/delete_category/<int:id>', views.delete_category)
+    path('categories/delete_category/<int:id>', views.delete_category),
+    path('subcategories/add_subcategory/', views.add_subcategory),
+    path('subcategories/edit_subcategory/<int:id>/', views.edit_subcategory),
+    path('subcategories/delete_subcategory/<int:id>/', views.delete_subcategory),
 ]

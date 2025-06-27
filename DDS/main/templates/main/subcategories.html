@@ -2,4 +2,39 @@
 {% block title %}Подкатегории{% endblock %}
 {% block content %}
 <h1>Подкатегории</h1>
+<form method="POST" action="add_subcategory/">
+    {% csrf_token %}
+    <p>
+        <label>Введите название</label>
+        <input type="text" name="name">
+    </p>
+    <p>
+        <label>Выберите категорию</label>
+        <select name="category">
+            {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </p>
+    <input type="submit" value="Сохранить">
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Название</th>
+        <th>Категория</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for subcategory in subcategories %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ subcategory.name }}</td>
+        <td>{{ subcategory.category.name }}</td>
+        <td><a href="edit_subcategory/{{ subcategory.id }}">Изменить</a>  <a href="delete_subcategory/{{ subcategory.id }}">Удалить</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

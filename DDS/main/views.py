@@ -85,19 +85,42 @@ def delete_status(request, id):
 
 
 def subcategories(request):
-    return render(request, 'main/subcategories.html')
+    subcategories = Subcategory.objects.all()
+    categories = Category.objects.all()
+    return render(request, 'main/subcategories.html', {"subcategories": subcategories, "categories": categories})
 
 
 def add_subcategory(request):
-    pass
+    if request.method == "POST":
+        subcategory = Subcategory()
+        subcategory.name = request.POST.get("name")
+        subcategory.category_id = request.POST.get("category")
+        subcategory.save()
+    return HttpResponseRedirect("/subcategories")
 
 
-def edit_subcategory(request):
-    pass
+def edit_subcategory(request, id):
+    try:
+        subcategory = Subcategory.objects.get(id=id)
+        categories = Category.objects.all()
+        if request.method == "POST":
+            subcategory.name = request.POST.get("name")
+            subcategory.category_id = request.POST.get("category")
+            subcategory.save()
+            return HttpResponseRedirect("/subcategories")
+        else:
+            return render(request, 'main/edit_subcategory.html', {"subcategory": subcategory, "categories": categories})
+    except Subcategory.DoesNotExist:
+        return HttpResponseNotFound("<h2>Подкатегория не найдена</h2>")
 
 
-def delete_subcategory(request):
-    pass
+def delete_subcategory(request, id):
+    try:
+        subcategory = Subcategory.objects.get(id=id)
+        subcategory.delete()
+        return HttpResponseRedirect("/subcategories")
+    except Subcategory.DoesNotExist:
+        return HttpResponseNotFound("<h2>Подкатегория не найдена</h2>")
 
 
 def types(request):

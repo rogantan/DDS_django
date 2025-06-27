@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+{% block title %}{% endblock %}
+{% block content %}
+<h>Редактирование подкатегории</h>
+<form method="POST">
+    {% csrf_token %}
+    <p>
+        <label>Введите название</label>
+        <input type="text" name="name" value="{{ subcategory.name }}">
+    </p>
+    <p>
+        <label>Выберите категорию</label>
+        <select name="category">
+            {% for category in categories %}
+            <option value="{{ category.id }}"
+            {% if category.id == subcategory.category_id %}
+            selected
+            {% endif %}
+            >{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </p>
+    <input type="submit" value="Сохранить">
+</form>
+{% endblock %}
