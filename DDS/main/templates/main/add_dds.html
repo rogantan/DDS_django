@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+{% block title %}Добавление записи о ДДС{% endblock %}
+{% block content %}
+<h2>Добавление записи о ДДС</h2>
+<form method="POST" action="add_dds">
+    {% csrf_token %}
+    <p>
+        <label>Введите сумму</label>
+        <input type="number" min="0.0" step="0.01" name="amount">
+    </p>
+    <p>
+        <label>Выберите подкатегорию</label>
+        <select name="subcategory">
+            {% for subcategory in subcategories %}
+            <option value="{{ subcategory.id }}">{{ subcategory.name }}</option>
+            {% endfor %}
+        </select>
+    </p>
+    <p>
+        <label>Выберите статус</label>
+        <select name="status">
+            {% for status in statuses %}
+            <option value="{{ status.id }}">{{ status.name }}</option>
+            {% endfor %}
+        </select>
+    </p>
+    <p>
+        <label>Введите комментарий (необязательно)</label>
+        <input type="text" name="comment">
+    </p>
+    <input type="submit" value="Сохранить">
+</form>
+{% endblock %}

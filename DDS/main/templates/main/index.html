@@ -6,6 +6,7 @@
     {{ filter_form.as_p }}
     <button type="submit">Применить</button>
 </form>
+<a href="{% url 'add_dds' %}">Добавить запись</a>
 <table>
     <thead>
     <tr>
@@ -18,17 +19,21 @@
         <th>Комментарий</th>
     </tr></thead>
     <tbody>
-    {% for entry in entries %}
+    {% for entry in ddes %}
     <tr>
-        <td>{{ entry.date }}</td>
-        <td>{{ entry.status }}</td>
-        <td>{{ entry.type }}</td>
-        <td>{{ entry.category }}</td>
-        <td>{{ entry.subcategory }}</td>
-        <td>{{ entry.amount }} ₽</td>
-        <td>{{ entry.comment }}</td>
-        <td><a href="{% url 'edit_entry' entry.pk %}" class="btn btn-warning btn-sm">Редактировать</a></td>
-        <td><a href="{% url 'delete_entry' entry.pk %}" class="btn btn-danger btn-sm">Удалить</a></td>
+        <td align="center">{{ entry.date }}</td>
+        <td align="center">{{ entry.status }}</td>
+        <td align="center">{{ entry.subcategory.category.type }}</td>
+        <td align="center">{{ entry.subcategory.category }}</td>
+        <td align="center">{{ entry.subcategory }}</td>
+        <td align="center">{{ entry.amount }} ₽</td>
+        {% if entry.comment == '' %}
+        <td align="center">-</td>
+        {% else %}
+        <td align="center">{{ entry.comment }}</td>
+        {% endif %}
+        <td align="center"><a href="edit_dds/{{ entry.id }}" class="btn btn-warning btn-sm">Изменить</a></td>
+        <td align="center"><a href="delete_dds/{{ entry.id }}" class="btn btn-danger btn-sm">Удалить</a></td>
     </tr>
     {% endfor %}
     </tbody>

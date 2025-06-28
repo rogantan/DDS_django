@@ -20,4 +20,8 @@ urlpatterns = [
     path('subcategories/add_subcategory/', views.add_subcategory),
     path('subcategories/edit_subcategory/<int:id>/', views.edit_subcategory),
     path('subcategories/delete_subcategory/<int:id>/', views.delete_subcategory),
+    path('new_dds/', views.to_add_dds, name='add_dds'),
+    path('new_dds/add_dds', views.add_dds),
+    path('edit_dds/<int:id>/', views.edit_dds),
+    path('delete_dds/<int:id>/', views.delete_dds),
 ]

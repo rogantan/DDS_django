@@ -8,6 +8,31 @@ def index(request):
     return render(request, 'main/index.html', {"ddes": ddes})
 
 
+def to_add_dds(request):
+    statuses = Status.objects.all()
+    subcategories = Subcategory.objects.all()
+    return render(request, 'main/add_dds.html', {"statuses": statuses, "subcategories": subcategories})
+
+
+def add_dds(request):
+    if request.method == "POST":
+        dds = DDS()
+        dds.amount = request.POST.get("amount")
+        dds.subcategory_id = request.POST.get("subcategory")
+        dds.status_id = request.POST.get("status")
+        dds.comment = request.POST.get("comment")
+        dds.save()
+    return HttpResponseRedirect("/")
+
+
+def edit_dds(request):
+    pass
+
+
+def delete_dds(request):
+    pass
+
+
 def categories(request):
     categories = Category.objects.all()
     types = Type.objects.all()

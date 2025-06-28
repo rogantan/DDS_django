@@ -20,9 +20,9 @@
 <tbody>
 {% for status in statuses %}
 <tr>
-    <td>{{ forloop.counter }}</td>
-    <td>{{ status.name }}</td>
-    <td><a href="edit/{{ status.id }}">Изменить</a>  <a href="delete/{{ status.id}}">Удалить</a></td>
+    <td align="center">{{ forloop.counter }}</td>
+    <td align="center">{{ status.name }}</td>
+    <td align="center"><a href="edit/{{ status.id }}">Изменить</a>  <a href="delete/{{ status.id}}">Удалить</a></td>
 </tr>
 {% endfor %}
 </tbody>
