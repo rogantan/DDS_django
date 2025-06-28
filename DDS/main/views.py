@@ -5,6 +5,14 @@ from .models import Status, Subcategory, Category, DDS, Type
 
 def index(request):
     ddes = DDS.objects.all()
+    filters = {}
+    if request.GET.get('date_from'):
+        filters['date__gte'] = request.GET['date_from']
+    if request.GET.get('date_to'):
+        filters['date__lte'] = request.GET['date_to']
+    if request.GET.get('status'):
+        filters['status_id'] = request.GET['status']
+    ddes = ddes.filter(**filters)
     return render(request, 'main/index.html', {"ddes": ddes})
 
 
@@ -25,12 +33,32 @@ def add_dds(request):
     return HttpResponseRedirect("/")
 
 
-def edit_dds(request):
-    pass
+def edit_dds(request, id):
+    try:
+        dds = DDS.objects.get(id=id)
+        if request.method == "POST":
+            dds.date = request.POST.get("date")
+            dds.amount = request.POST.get("amount")
+            dds.subcategory_id = request.POST.get("subcategory")
+            dds.status_id = request.POST.get("status")
+            dds.comment = request.POST.get("comment")
+            dds.save()
+            return HttpResponseRedirect("/")
+        else:
+            statuses = Status.objects.all()
+            subcategories = Subcategory.objects.all()
+            return render(request, 'main/edit_dds.html', {"statuses": statuses, "subcategories": subcategories, "dds": dds})
+    except DDS.DoesNotExist:
+        return HttpResponseNotFound("<h2>Запись не найдена</h2>")
 
 
-def delete_dds(request):
-    pass
+def delete_dds(request, id):
+    try:
+        dds = DDS.objects.get(id=id)
+        dds.delete()
+        return HttpResponseRedirect("/")
+    except DDS.DoesNotExist:
+        return HttpResponseNotFound("<h2>Запись не найдена</h2>")
 
 
 def categories(request):

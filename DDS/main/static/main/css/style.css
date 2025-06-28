@@ -12,6 +12,8 @@ body {
     justify-content: space-between;
     display: flex;
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .list li a {
@@ -30,4 +32,9 @@ body {
 
 td a {
     color: #fff;
+}
+
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
 }

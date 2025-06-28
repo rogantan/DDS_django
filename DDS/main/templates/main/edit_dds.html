@@ -2,7 +2,44 @@
 {% block title %}Редактирование ДДС{% endblock %}
 {% block content %}
 <h2>Редактирование записи о ДДС</h2>
-<form>
-
+<form method="POST">
+    {% csrf_token %}
+    <p>
+        <label>Введите дату и время</label>
+        <input type="datetime-local" name="date" value="{{ dds.date }}" required>
+    </p>
+    <p>
+        <label>Введите сумму</label>
+        <input type="number" min="0.0" step="0.01" name="amount" value="{{ dds.amount }}">
+    </p>
+    <p>
+        <label>Выберите подкатегорию</label>
+        <select name="subcategory">
+            {% for subcategory in subcategories %}
+            <option value="{{ subcategory.id }}"
+            {% if subcategory.id == dds.subcategory_id %}
+            selected
+            {% endif %}
+            >{{ subcategory.name }}</option>
+            {% endfor %}
+        </select>
+    </p>
+    <p>
+        <label>Выберите статус</label>
+        <select name="status">
+            {% for status in statuses %}
+            <option value="{{ status.id }}"
+            {% if status.id == dds.status_id %}
+            selected
+            {% endif %}
+            >{{ status.name }}</option>
+            {% endfor %}
+        </select>
+    </p>
+    <p>
+        <label>Введите комментарий (необязательно)</label>
+        <input type="text" name="comment" value="{{ dds.comment }}">
+    </p>
+    <input type="submit" value="Сохранить">
 </form>
 {% endblock %}
