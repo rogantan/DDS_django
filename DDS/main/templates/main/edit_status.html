@@ -6,7 +6,7 @@
   {% csrf_token %}
   <p>
     <label>Введите название статуса</label>
-    <input type="text" name="name" value="{{ status.name }}">
+    <input type="text" name="name" value="{{ status.name }}" required>
   </p>
   <input type="submit" value="Сохранить">
 </form>

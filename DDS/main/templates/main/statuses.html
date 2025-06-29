@@ -1,30 +1,35 @@
 {% extends 'main/base.html' %}
 {% block title %}Статусы{% endblock %}
 {% block content %}
-<h1>Статусы</h1>
-<form method="POST" action="add_status/">
-    {% csrf_token %}
-    <p>
-        <label>Введите название статуса</label>
-        <input type="text" name="name">
-    </p>
-    <input type="submit" value="Сохранить">
-</form>
-<table>
-<thead>
-<tr>
-    <th>Id</th>
-    <th>Название</th>
-</tr>
-</thead>
-<tbody>
-{% for status in statuses %}
-<tr>
-    <td align="center">{{ forloop.counter }}</td>
-    <td align="center">{{ status.name }}</td>
-    <td align="center"><a href="edit/{{ status.id }}">Изменить</a>  <a href="delete/{{ status.id}}">Удалить</a></td>
-</tr>
-{% endfor %}
-</tbody>
-</table>
+<div class="main">
+    <h1>Статусы</h1>
+    <form method="POST" action="add_status/">
+        {% csrf_token %}
+        <p>
+            <label>Введите название статуса</label>
+            <input type="text" name="name" required>
+        </p>
+        <input type="submit" value="Сохранить">
+    </form>
+</div>
+<div class="main1">
+    <table class="table1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Название</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for status in statuses %}
+        <tr>
+            <td align="center">{{ forloop.counter }}</td>
+            <td align="center">{{ status.name }}</td>
+            <td align="center"><a href="edit/{{ status.id }}">Изменить</a></td>
+            <td align="center"><a href="delete/{{ status.id}}">Удалить</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

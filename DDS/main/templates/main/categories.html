@@ -1,40 +1,45 @@
 {% extends 'main/base.html' %}
 {% block title %}Категории{% endblock %}
 {% block content %}
-<h1>Категории</h1>
-<form method="POST" action="add_category/">
-    {% csrf_token %}
-    <p>
-        <label>Введите название категории</label>
-        <input type="text" name="name">
-    </p>
-    <p>
-        <label>Выберите нужный тип для категории</label>
-        <select name="type">
-            {% for type in types %}
-            <option value="{{ type.id }}">{{ type.name }}</option>
-            {% endfor %}
-        </select>
-    </p>
-  <input type="submit" value="Сохранить">
-</form>
-<table>
-<thead>
-<tr>
-    <th>Id</th>
-    <th>Название</th>
-    <th>Тип</th>
-</tr>
-</thead>
-<tbody>
-{% for category in categories %}
-<tr>
-    <td>{{ forloop.counter }}</td>
-    <td>{{ category.name }}</td>
-    <td>{{ category.type.name }}</td>
-    <td><a href="edit_category/{{ category.id }}">Изменить</a>  <a href="delete_category/{{ category.id}}">Удалить</a></td>
-</tr>
-{% endfor %}
-</tbody>
-</table>
+<div class="main">
+    <h1>Категории</h1>
+    <form method="POST" action="add_category/">
+        {% csrf_token %}
+        <p>
+            <label>Введите название категории</label>
+            <input type="text" name="name" required>
+        </p>
+        <p>
+            <label>Выберите нужный тип для категории</label>
+            <select name="type">
+                {% for type in types %}
+                <option value="{{ type.id }}">{{ type.name }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <input type="submit" value="Сохранить">
+    </form>
+</div>
+<div class="main1">
+    <table class="table1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Название</th>
+            <th>Тип</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ category.name }}</td>
+            <td>{{ category.type.name }}</td>
+            <td><a href="edit_category/{{ category.id }}">Изменить</a></td>
+            <td><a href="delete_category/{{ category.id}}">Удалить</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

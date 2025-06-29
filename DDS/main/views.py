@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import render
 from .models import Status, Subcategory, Category, DDS, Type
@@ -37,7 +39,7 @@ def edit_dds(request, id):
     try:
         dds = DDS.objects.get(id=id)
         if request.method == "POST":
-            dds.date = request.POST.get("date")
+            dds.date = datetime.fromisoformat(request.POST.get("date"))
             dds.amount = request.POST.get("amount")
             dds.subcategory_id = request.POST.get("subcategory")
             dds.status_id = request.POST.get("status")
@@ -47,7 +49,8 @@ def edit_dds(request, id):
         else:
             statuses = Status.objects.all()
             subcategories = Subcategory.objects.all()
-            return render(request, 'main/edit_dds.html', {"statuses": statuses, "subcategories": subcategories, "dds": dds})
+            formatted_date = dds.date.strftime("%Y-%m-%dT%H:%M")
+            return render(request, 'main/edit_dds.html', {"statuses": statuses, "subcategories": subcategories, "dds": dds, "formatted_date": formatted_date})
     except DDS.DoesNotExist:
         return HttpResponseNotFound("<h2>Запись не найдена</h2>")
 

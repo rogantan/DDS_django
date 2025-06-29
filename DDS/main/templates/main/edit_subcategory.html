@@ -6,7 +6,7 @@
     {% csrf_token %}
     <p>
         <label>Введите название</label>
-        <input type="text" name="name" value="{{ subcategory.name }}">
+        <input type="text" name="name" value="{{ subcategory.name }}" required>
     </p>
     <p>
         <label>Выберите категорию</label>

@@ -1,41 +1,67 @@
 {% extends 'main/base.html' %}
 {% block title %}Главная страница{% endblock %}
 {% block content %}
-<h1>Управление движением денежных средств </h1>
-<form method="GET">
-    {{ filter_form.as_p }}
-    <button type="submit">Применить</button>
-</form>
-<a href="{% url 'add_dds' %}">Добавить запись</a>
-<table>
-    <thead>
-    <tr>
-        <th>Дата</th>
-        <th>Статус</th>
-        <th>Тип</th>
-        <th>Категория</th>
-        <th>Подкатегория</th>
-        <th>Сумма</th>
-        <th>Комментарий</th>
-    </tr></thead>
-    <tbody>
-    {% for entry in ddes %}
-    <tr>
-        <td align="center">{{ entry.date }}</td>
-        <td align="center">{{ entry.status }}</td>
-        <td align="center">{{ entry.subcategory.category.type }}</td>
-        <td align="center">{{ entry.subcategory.category }}</td>
-        <td align="center">{{ entry.subcategory }}</td>
-        <td align="center">{{ entry.amount }} ₽</td>
-        {% if entry.comment == '' %}
-        <td align="center">-</td>
-        {% else %}
-        <td align="center">{{ entry.comment }}</td>
-        {% endif %}
-        <td align="center"><a href="edit_dds/{{ entry.id }}" class="btn btn-warning btn-sm">Изменить</a></td>
-        <td align="center"><a href="delete_dds/{{ entry.id }}" class="btn btn-danger btn-sm">Удалить</a></td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+<div class="main">
+    <h1>Управление движением денежных средств </h1>
+    <button class="add_dds"><a href="{% url 'add_dds' %}">Добавить запись</a></button>
+    <table class="table">
+        <thead>
+        <tr>
+            <th align="center">Дата</th>
+            <th align="center">Статус</th>
+            <th align="center">Тип</th>
+            <th align="center">Категория</th>
+            <th align="center">Подкатегория</th>
+            <th align="center">Сумма</th>
+            <th align="center">Комментарий</th>
+        </tr></thead>
+        <tbody>
+        {% for entry in ddes %}
+        <tr>
+            <td align="center">{{ entry.date }}</td>
+            <td align="center">{{ entry.status }}</td>
+            <td align="center">{{ entry.subcategory.category.type }}</td>
+            <td align="center">{{ entry.subcategory.category }}</td>
+            <td align="center">{{ entry.subcategory }}</td>
+            <td align="center">{{ entry.amount }} ₽</td>
+            {% if entry.comment == '' %}
+            <td align="center">-</td>
+            {% else %}
+            <td align="center">{{ entry.comment }}</td>
+            {% endif %}
+            <td align="center"><a href="edit_dds/{{ entry.id }}" class="btn btn-warning btn-sm">Изменить</a></td>
+            <td align="center"><a href="delete_dds/{{ entry.id }}" class="btn btn-danger btn-sm">Удалить</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="main1">
+    <h3>Фильтры</h3>
+    <form method="POST">
+        <p>
+            <label>Введите сумму</label>
+            <input type="text" name="amount">
+        </p>
+        <p>
+            <label>Выберите подкатегорию</label>
+            <select name="subcategory_select">
+                <option value="">Choose a variant</option>
+                {% for subcategory in subcategories %}
+                <option value="{{ subcategory.id }}">{{ subcategory.name }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <p>
+            <label>Выберите категорию</label>
+            <select name="category_select">
+                <option value="">Choose a variant</option>
+                {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <input type="submit" value="Применить">
+    </form>
+</div>
 {% endblock %}

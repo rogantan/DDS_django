@@ -1,10 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+QLD+Hand:wght@400..700&family=Marck+Script&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 body {
     background: #1c1c1c;
     color: #fff;
+    display: flex;
+    flex-direction: column;
 }
 
 .hed .container {
-    margin: 0 auto;
+    margin: 20px auto 0 auto;
+    justify-content: space-between;
 }
 
 .list {
@@ -35,6 +39,55 @@ td a {
 }
 
 .container {
-    max-width: 1140px;
+    max-width: 700px;
     margin: 0 auto;
+}
+
+.form {
+    margin: 0 auto;
+}
+
+.table {
+    width: 100%;
+    border: none;
+    margin-bottom: 20px;
+}
+.table thead th, .table1 thead th {
+    padding: 10px;
+    font-weight: 500;
+    font-size: 16px;
+    font-family: 'Shantell Sans', cursive;
+    line-height: 20px;
+    text-align: center;
+    color: #fff;
+    border-top: 2px solid #716561;
+    border-bottom: 2px solid #716561;
+    align-self: center;
+}
+.table tbody td, .table1 tbody td {
+    padding: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #fff;
+    border-top: 1px solid #716561;
+}
+
+.table1 {
+    width: 30%;
+    border: none;
+    margin-bottom: 20px;
+}
+
+
+.main {
+    margin-bottom: 40px;
+}
+
+.add_dds {
+    margin-bottom: 20px;
+}
+
+.add_dds a {
+    color: #1c1c1c;
+    text-decoration: none;
 }

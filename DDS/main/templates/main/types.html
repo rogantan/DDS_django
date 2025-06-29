@@ -1,30 +1,36 @@
 {% extends 'main/base.html' %}
 {% block title %}Типы{% endblock %}
 {% block content %}
-<h1>Типы</h1>
-<form method="POST" action="add_type/">
-    {% csrf_token %}
-    <p>
-        <label>Введите название типа</label>
-        <input type="text" name="name">
-    </p>
-    <input type="submit" value="Сохранить">
-</form>
-<table>
-<thead>
-<tr>
-    <th>Id</th>
-    <th>Название</th>
-</tr>
-</thead>
-<tbody>
-{% for type in types %}
-<tr>
-    <td>{{ forloop.counter }}</td>
-    <td>{{ type.name }}</td>
-    <td><a href="edit_type/{{ type.id }}">Изменить</a>  <a href="delete_type/{{ type.id}}">Удалить</a></td>
-</tr>
-{% endfor %}
-</tbody>
-</table>
+<div class="main">
+    <h1>Типы</h1>
+    <form method="POST" action="add_type/">
+        {% csrf_token %}
+        <p>
+            <label>Введите название типа</label>
+            <input type="text" name="name" required>
+        </p>
+        <input type="submit" value="Сохранить">
+    </form>
+</div>
+<div class="main1">
+    <table class="table1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Название</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for type in types %}
+        <tr>
+            <td align="center">{{ forloop.counter }}</td>
+            <td align="center">{{ type.name }}</td>
+            <td align="center"><a href="edit_type/{{ type.id }}">Изменить</a></td>
+            <td align="center"><a href="delete_type/{{ type.id}}">Удалить</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 {% endblock %}
