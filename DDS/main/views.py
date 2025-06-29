@@ -15,7 +15,12 @@ def index(request):
     if request.GET.get('status'):
         filters['status_id'] = request.GET['status']
     ddes = ddes.filter(**filters)
-    return render(request, 'main/index.html', {"ddes": ddes})
+    categories = Category.objects.all()
+    types = Type.objects.all()
+    statuses = Status.objects.all()
+    subcategories = Subcategory.objects.all()
+    return render(request, 'main/index.html', {"ddes": ddes, "categories": categories,
+                                               "types": types, "statuses": statuses, "subcategories": subcategories})
 
 
 def to_add_dds(request):

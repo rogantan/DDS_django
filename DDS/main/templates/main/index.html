@@ -40,8 +40,32 @@
     <h3>Фильтры</h3>
     <form method="POST">
         <p>
+            <label>С</label>
+            <input type="datetime-local" name="from" value="">
+            <label>До</label>
+            <input type="datetime-local" name="to" value="">
+        </p>
+        <p>
             <label>Введите сумму</label>
             <input type="text" name="amount">
+        </p>
+        <p>
+            <label>Выберите тип</label>
+            <select name="type_select">
+                <option value="">Choose a variant</option>
+                {% for type in types %}
+                <option value="{{ type.id }}">{{ type.name }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <p>
+            <label>Выберите статус</label>
+            <select>
+                <option value="">Choose a variant</option>
+                {% for status in statuses %}
+                <option value="{{ status.id }}">{{ status.name }}</option>
+                {% endfor %}
+            </select>
         </p>
         <p>
             <label>Выберите подкатегорию</label>
