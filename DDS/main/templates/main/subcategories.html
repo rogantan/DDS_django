@@ -1,8 +1,10 @@
 {% extends 'main/base.html' %}
 {% block title %}Подкатегории{% endblock %}
 {% block content %}
-<div class="main">
+<div class="page-header">
     <h1>Подкатегории</h1>
+</div>
+<div class="main">
     <form method="POST" action="add_subcategory/">
         {% csrf_token %}
         <p>

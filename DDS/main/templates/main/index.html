@@ -1,8 +1,10 @@
 {% extends 'main/base.html' %}
 {% block title %}Главная страница{% endblock %}
 {% block content %}
-<div class="main">
+<div class="page-header">
     <h1>Управление движением денежных средств </h1>
+</div>
+<div class="main1">
     <button class="add_dds"><a href="{% url 'add_dds' %}">Добавить запись</a></button>
     <table class="table">
         <thead>
@@ -36,9 +38,10 @@
         </tbody>
     </table>
 </div>
-<div class="main1">
+<div class="main">
     <h3>Фильтры</h3>
     <form method="POST">
+        {% csrf_token %}
         <p>
             <label>С</label>
             <input type="datetime-local" name="from" value="">
@@ -47,7 +50,7 @@
         </p>
         <p>
             <label>Введите сумму</label>
-            <input type="text" name="amount">
+            <input type="number" name="amount" min="0.0" step="0.01">
         </p>
         <p>
             <label>Выберите тип</label>

@@ -81,13 +81,62 @@ td a {
 
 .main {
     margin-bottom: 40px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    padding: 10px;
+    width: 600px;
 }
 
 .add_dds {
     margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: 2px solid #fff;
+    width: 150px;
+    height: 40px;
+    opacity: 0.7;
 }
 
 .add_dds a {
-    color: #1c1c1c;
+    color: #fff;
+    font-size: 16px;
     text-decoration: none;
+    opacity: 0.7;
+}
+
+.add_dds a:hover, .add_dds:hover, form input[type=submit]:hover {
+    opacity: 1;
+}
+
+form input[type=submit] {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+    opacity: 0.7;
+    font-size: 16px;
+}
+
+form input[type=text], form input[type=number] {
+    width: 30%;
+    height: 30px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+form input[type=text]:focus {
+    border: 3px solid #716561;
+}
+
+form p label {
+    font-size: 18px;
+}
+
+form p select, form p input[type=datetime-local] {
+    width: 30%;
+    height: 35px;
+    border-radius: 5px;
+    font-size: 20px;
+    border: 1px solid #fff;
 }

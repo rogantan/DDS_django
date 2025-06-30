@@ -1,8 +1,10 @@
 {% extends 'main/base.html' %}
 {% block title %}Статусы{% endblock %}
 {% block content %}
-<div class="main">
+<div class="page-header">
     <h1>Статусы</h1>
+</div>
+<div class="main">
     <form method="POST" action="add_status/">
         {% csrf_token %}
         <p>
